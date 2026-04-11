@@ -1,0 +1,1 @@
+This project is to create AI resume creator/modifier with WebViewer PDF Content Editing feature.
