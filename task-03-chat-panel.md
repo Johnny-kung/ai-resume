@@ -102,6 +102,7 @@ interface EditItem {
 ```
 
 ## Acceptance Criteria
+- The chat panel is rendered on the right side of the application, alongside the PDF viewer.
 - User can send messages and see a scrolling conversation history.
 - The AI reply appears after the API call completes; a loading spinner shows while waiting.
 - When the AI response includes edit suggestions, an **Apply Changes** button is visible.
