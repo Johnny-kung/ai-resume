@@ -1,0 +1,14 @@
+{
+  "name": "ai-resume",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix client\" \"cd server && go run main.go\"",
+    "dev": "npm run start",
+    "client": "npm run dev --prefix client",
+    "server": "cd server && go run main.go"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
