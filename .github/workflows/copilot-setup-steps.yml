@@ -42,16 +42,26 @@ jobs:
             - name: Install Go dependencies
               run: cd server && go mod download
 
-            - name: Start Vite dev server in background
-              run: |
-                  npm run dev --prefix client &
-                  echo $! > /tmp/vite.pid
+            - name: Start Go backend in background
+              run: cd server && go run main.go &
 
-            - name: Wait for Vite to be ready on port 5173
+            - name: Start Vite dev server in background
+              run: npm run dev --prefix client &
+
+            - name: Wait for servers to be ready
               run: |
+                  echo "Waiting for Go backend on port 8080..."
+                  for i in $(seq 1 30); do
+                    if curl -sf http://localhost:8080/health > /dev/null 2>&1; then
+                      echo "Go backend is ready!"
+                      break
+                    fi
+                    sleep 1
+                  done
+
                   echo "Waiting for Vite on port 5173..."
                   for i in $(seq 1 30); do
-                    if curl -s http://localhost:5173 > /dev/null 2>&1; then
+                    if curl -sf http://localhost:5173 > /dev/null 2>&1; then
                       echo "Vite is ready!"
                       exit 0
                     fi
