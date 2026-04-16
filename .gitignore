@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Build outputs
+client/dist/
+server/ai-resume-server
+
+# Environment variables
+.env
+
+# Go binaries
+*.exe
+*.test
+
+# Vite
+client/.vite/
