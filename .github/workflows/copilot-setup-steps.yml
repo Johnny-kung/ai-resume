@@ -42,11 +42,14 @@ jobs:
             - name: Install Go dependencies
               run: cd server && go mod download
 
+            - name: Build Go backend
+              run: cd server && go build -o /tmp/go-server .
+
             - name: Start Go backend in background
-              run: cd server && go run main.go &
+              run: nohup /tmp/go-server > /tmp/go-server.log 2>&1 &
 
             - name: Start Vite dev server in background
-              run: npm run dev --prefix client &
+              run: nohup npm run dev --prefix client > /tmp/vite.log 2>&1 &
 
             - name: Wait for servers to be ready
               run: |
